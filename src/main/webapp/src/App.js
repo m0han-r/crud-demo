@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback  } from "react";
 import VehicleForm from "./VehicleForm";
 import VehiclesList from "./VehicleList";
 import { Divider,Header, Container } from "semantic-ui-react";
@@ -76,6 +76,13 @@ function App() {
         console.error("Error deleting vehicle:", error);
       });
   };
+
+  const handleSearch = useCallback((search) => {
+      fetch(`${API_URL}?searchField=${search.field}&searchValue=${search.value}`)
+      .then((response) => response.json())
+      .then((data) => setVehicles(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, [])
   
   return (
     <Container>
@@ -86,7 +93,7 @@ function App() {
       />
       <VehicleForm vehicle={selectedVehicle} onSave={handleSave} onClear={handleClear}/>
       <Divider/>
-      <VehiclesList vehicles={vehicles} onEdit={handleEdit} onDelete={handleDelete}/>
+      <VehiclesList vehicles={vehicles} onEdit={handleEdit} onDelete={handleDelete} onSearch={handleSearch}/>
     </Container>
   );
 }
