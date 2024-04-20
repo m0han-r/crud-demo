@@ -5,7 +5,7 @@ import VehiclesList from "./VehicleList";
 import { Divider,Header, Container } from "semantic-ui-react";
 
 function App() {
-  const API_URL = 'http://localhost:8080/vehicle';
+  const API_URL = 'http://localhost:8080';
   const newVehicle = {
     ownerName: "",
     make: "",
@@ -18,17 +18,17 @@ function App() {
   const [selectedVehicle, setSelectedVehicle] = useState(newVehicle);
   
   useEffect(() => {
-    fetch(API_URL)
+    fetch(`${API_URL}/vehicles`)
       .then((response) => response.json())
       .then((data) => setVehicles(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
   
   const handleSave = async (vehicle) => {
-    const method = selectedVehicle?.id ? 'PATCH' : 'POST';
+    const method = selectedVehicle?.id ? 'PUT' : 'POST';
   
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${API_URL}/vehicle`, {
         method,
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ function App() {
   }
   
   const handleDelete = (id) => {
-    fetch(`${API_URL}/${id}`, {
+    fetch(`${API_URL}/vehicle/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -78,7 +78,7 @@ function App() {
   };
 
   const handleSearch = useCallback((search) => {
-      fetch(`${API_URL}?searchField=${search.field}&searchValue=${search.value}`)
+      fetch(`${API_URL}/vehicles?searchField=${search.field}&searchValue=${search.value}`)
       .then((response) => response.json())
       .then((data) => setVehicles(data))
       .catch((error) => console.error("Error fetching data:", error));

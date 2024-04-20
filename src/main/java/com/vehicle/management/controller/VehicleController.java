@@ -2,25 +2,19 @@ package com.vehicle.management.controller;
 
 import com.vehicle.management.model.Vehicle;
 import com.vehicle.management.repo.VehicleRepo;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("vehicle")
 public class VehicleController {
 
     @Autowired
     VehicleRepo vehicleRepo;
 
-    @GetMapping
+    @GetMapping("vehicles")
     public List<Vehicle> getVehicles(
             @RequestParam(required = false) SearchCriteria searchField,
             @RequestParam(required = false, defaultValue = "") String searchValue) {
@@ -34,17 +28,17 @@ public class VehicleController {
             );
     }
 
-    @PostMapping
+    @PostMapping("vehicle")
     public Vehicle addVehicle(@Validated @RequestBody Vehicle vehicle) {
         return vehicleRepo.save(vehicle);
     }
 
-    @PatchMapping
+    @PutMapping("vehicle")
     public Vehicle updateVehicle(@Validated @RequestBody Vehicle vehicle) {
         return vehicleRepo.save(vehicle);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("vehicle/{id}")
     public void deleteVehicle(@PathVariable Long id) {
         vehicleRepo.deleteById(id);
     }

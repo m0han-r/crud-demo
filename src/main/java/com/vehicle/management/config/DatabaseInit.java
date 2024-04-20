@@ -14,12 +14,6 @@ public class DatabaseInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Vehicle v1 = new Vehicle();
-        v1.setMake("Toyota");
-        v1.setModel("Supra");
-        v1.setOwnerName("Mohan");
-        v1.setVehicleYear("2009");
-        v1.setVin("1234567890");
-        vehicleRepo.save(v1);
+        vehicleRepo.save(new Vehicle("Mohan", "Toyota", "Supra","2009","1234567890"));
     }
 }

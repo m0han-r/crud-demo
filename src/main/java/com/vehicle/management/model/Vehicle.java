@@ -29,6 +29,16 @@ public class Vehicle {
     @Column(length = 15, unique = true)
     private String vin;
 
+    public Vehicle() {}
+
+    public Vehicle(String ownerName, String make, String model, String vehicleYear, String vin) {
+        this.ownerName = ownerName;
+        this.make = make;
+        this.model = model;
+        this.vehicleYear = vehicleYear;
+        this.vin = vin;
+    }
+
     public String getVin() {
         return vin;
     }
