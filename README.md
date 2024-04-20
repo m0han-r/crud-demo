@@ -6,6 +6,8 @@ This project is a demo for a Vehicle Management system implemented with Spring B
 
 This project demonstrates a basic CRUD (Create, Read, Update, Delete) and Search application for managing vehicle records. It features a RESTful API backend developed with Spring Boot and a frontend interface built using React.
 
+![App Sample](src/main/webapp/sample.jpg)
+
 ## Prerequisites
 
 - Java Development Kit (JDK)
